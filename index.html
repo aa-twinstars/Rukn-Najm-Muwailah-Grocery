@@ -6,99 +6,126 @@
 <title>Rukn Najm Muwailah Grocery</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        color: white;
-        text-align: center;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: url('https://images.unsplash.com/photo-1542838132-92c53300491e') no-repeat center/cover;
-    }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://images.unsplash.com/photo-1542838132-92c53300491e') no-repeat center/cover;
+}
 
-    body::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.65);
-        z-index: 0;
-    }
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    z-index: 0;
+}
 
-    .container {
-        position: relative;
-        z-index: 1;
-        background: rgba(0,0,0,0.6);
-        padding: 25px;
-        border-radius: 20px;
-        width: 90%;
-        max-width: 420px;
-        backdrop-filter: blur(10px);
-    }
+.container {
+    position: relative;
+    z-index: 1;
+    background: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 420px;
+    backdrop-filter: blur(10px);
+}
 
-    h1 { font-size: 22px; }
+h1 { font-size: 22px; }
+p { margin: 5px 0; font-size: 14px; color: #ddd; }
 
-    p {
-        margin: 5px 0;
-        font-size: 14px;
-        color: #ddd;
-    }
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    width: 85%;
+}
 
-    .btn {
-        display: block;
-        margin: 10px auto;
-        padding: 12px;
-        border-radius: 30px;
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        width: 85%;
-    }
+.whatsapp { background: #25D366; }
+.maps { background: #EA4335; }
 
-    .whatsapp { background: #25D366; }
-    .maps { background: #EA4335; }
+.products {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
 
-    .products {
-        margin-top: 15px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
+.product-btn {
+    background: rgba(255,255,255,0.15);
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    .product-btn {
-        background: rgba(255,255,255,0.15);
-        padding: 10px;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.product-btn:hover {
+    background: #25D366;
+}
 
-    .product-btn:hover {
-        background: #25D366;
-    }
+.icon { font-size: 22px; }
+.label { font-size: 12px; margin-top: 5px; }
 
-    .icon {
-        font-size: 22px;
-    }
+.lang-switch button {
+    margin: 3px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-    .label {
-        font-size: 12px;
-        margin-top: 5px;
-    }
+.cart {
+    margin-top: 20px;
+    background: rgba(0,0,0,0.6);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: left;
+}
 
-    .lang-switch button {
-        margin: 3px;
-        padding: 6px 10px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+.cart h3 { margin: 0 0 5px 0; }
 
+.cart-items { min-height: 40px; color: #fff; }
+
+.checkout {
+    background: #25D366;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.selection-popup {
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.selection-popup select, .selection-popup button {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
 </style>
 </head>
-
 <body>
 
 <div class="container">
@@ -111,127 +138,210 @@
     </div>
 
     <h1 id="title">Rukn Najm Muwailah Grocery</h1>
-    <p id="location">📍 Shop #1, Bulding #535, Muweilah, Sharjah</p>
+    <p id="location">📍 Shop #1, Building #535, Muweilah, Sharjah</p>
     <p id="time">🕒 Open Daily: 7:00 AM - 12:00 AM</p>
 
     <a id="waBtn" class="btn whatsapp" href="#" target="_blank">📲 Order on WhatsApp</a>
-    <a class="btn maps" href="https://maps.app.goo.gl/vY7moLEHgmpVTnhe6" target="_blank">📍 Find Us in Google maps</a>
+    <a id="mapsBtn" class="btn maps" href="https://maps.app.goo.gl/vY7moLEHgmpVTnhe6" target="_blank">📍 Find us in Google Maps</a>
 
     <p id="quick">🛒 Quick Order:</p>
 
     <!-- PRODUCTS -->
     <div class="products">
-        <div class="product-btn" onclick="order('Milk')">
+        <div class="product-btn" onclick="selectOption('Milk')">
             <div class="icon">🥛</div>
             <div class="label" id="milk">Milk</div>
         </div>
 
-        <div class="product-btn" onclick="order('Eggs')">
+        <div class="product-btn" onclick="selectOption('Eggs')">
             <div class="icon">🥚</div>
             <div class="label" id="eggs">Eggs</div>
         </div>
 
-        <div class="product-btn" onclick="order('Bread')">
+        <div class="product-btn" onclick="selectOption('Bread')">
             <div class="icon">🍞</div>
             <div class="label" id="bread">Bread</div>
         </div>
 
-        <div class="product-btn" onclick="order('Rice')">
+        <div class="product-btn" onclick="selectOption('Rice')">
             <div class="icon">🍚</div>
             <div class="label" id="rice">Rice</div>
         </div>
 
-        <div class="product-btn" onclick="order('Water')">
+        <div class="product-btn" onclick="selectOption('Water')">
             <div class="icon">💧</div>
             <div class="label" id="water">Water</div>
         </div>
 
-        <div class="product-btn" onclick="order('Vegetables')">
+        <div class="product-btn" onclick="addCart('Vegetables')">
             <div class="icon">🥦</div>
             <div class="label" id="veg">Vegetables</div>
         </div>
+    </div>
+
+    <!-- SELECTION POPUP -->
+    <div id="selectionPopup" class="selection-popup" style="display:none;">
+        <div id="selectionTitle"></div>
+        <select id="selectionOptions"></select>
+        <button onclick="confirmSelection()">Add to Cart</button>
+    </div>
+
+    <!-- CART -->
+    <div class="cart">
+        <h3 id="cartTitle">🛒 Cart</h3>
+        <div class="cart-items" id="cartItems">Empty</div>
+        <button class="checkout" onclick="checkout()">📲 Send Order</button>
     </div>
 
 </div>
 
 <script>
 let lang = 'en';
+let cart = {};
+let currentItem = null;
+
+const data = {
+    en: {
+        title: "Rukn Najm Muwailah Grocery",
+        location: "📍 Shop #1, Building #535, Muweilah, Sharjah",
+        time: "🕒 Open Daily: 7:00 AM - 12:00 AM",
+        wa: "📲 Order on WhatsApp",
+        maps: "📍 Find us in Google Maps",
+        quick: "🛒 Quick Order:",
+        milk: "Milk",
+        eggs: "Eggs",
+        bread: "Bread",
+        rice: "Rice",
+        water: "Water",
+        veg: "Vegetables",
+        cartTitle: "🛒 Cart",
+        noItems: "Empty",
+        checkoutMsg: "Hi, I want to order:",
+        options: {
+            Milk: ["200 ml", "360 ml", "500 ml", "1 litre", "2 litre"],
+            Eggs: ["6 pieces", "15 pieces", "30 pieces"],
+            Bread: ["Arabic Bread White Big (6 pcs)","Arabic Bread White Small (4 pcs)","Arabic Bread Brown Small (4 pcs)","Slice White Bread Big (600 grams)","Slice White Bread Small (300 grams)","Slice Milk Bread Big (600 grams)","Slice Milk Bread Small (325 grams)","Burger Bun (6 Pcs)","Samoon (6 pcs)","Sandwitch (Chocolate)","Sandwitch (Zatar)","Sandwitch (Cheese)","Sandwitch (Chicken Mayonese)"],
+            Rice: ["A1 Rice Basmati (1 kg)","Rice Basmati (5 kg)","Rice Basmati (10 kg)","Sinnara Rice (1 kg)","Sinnara Rice (2 kg)","Sinnara Rice (10 kg)","Sunwhite Rice (1 kg)","Sunwhite Rice (2 kg)","Sunwhite Rice (5 kg)","Matta Rice (1 kg)","Matta Rice (2 kg)","Matta Rice (5 kg)"],
+            Water: ["300 ml","500 ml","1.5 litres","5 litres","20 litres"]
+        }
+    },
+    ar: {
+        title: "بقالة ركن نجم مويلح",
+        location: "📍 متجر1، مبنى535، مويلح، الشارقة",
+        time: "🕒 مفتوح يومياً: 7 صباحاً - 12 منتصف الليل",
+        wa: "📲 اطلب عبر واتساب",
+        maps: "📍 اعثر علينا على خرائط جوجل",
+        quick: "🛒 طلب سريع:",
+        milk: "حليب",
+        eggs: "بيض",
+        bread: "خبز",
+        rice: "أرز",
+        water: "ماء",
+        veg: "خضروات",
+        cartTitle: "🛒 سلة التسوق",
+        noItems: "فارغة",
+        checkoutMsg: "مرحبا، أريد طلب:",
+        options: {
+            Milk: ["200 مل","360 مل","500 مل","1 لتر","2 لتر"],
+            Eggs: ["6 قطع","15 قطعة","30 قطعة"],
+            Bread: ["خبز عربي أبيض كبير (6 قطع)","خبز عربي أبيض صغير (4 قطع)","خبز عربي بني صغير (4 قطع)","شريحة خبز أبيض كبير (600 غرام)","شريحة خبز أبيض صغير (300 غرام)","شريحة خبز حليب كبير (600 غرام)","شريحة خبز حليب صغير (325 غرام)","برجر بان (6 قطع)","سامون (6 قطع)","ساندويتش (شوكولاتة)","ساندويتش (زعتر)","ساندويتش (جبن)","ساندويتش (دجاج مايونيز)"],
+            Rice: ["أرز بسمتي A1 (1 كغ)","أرز بسمتي (5 كغ)","أرز بسمتي (10 كغ)","أرز سينارا (1 كغ)","أرز سينارا (2 كغ)","أرز سينارا (10 كغ)","أرز سنوايت (1 كغ)","أرز سنوايت (2 كغ)","أرز سنوايت (5 كغ)","أرز ماتا (1 كغ)","أرز ماتا (2 كغ)","أرز ماتا (5 كغ)"],
+            Water: ["300 مل","500 مل","1.5 لتر","5 لتر","20 لتر"]
+        }
+    },
+    ml: {
+        title: "റുകുന് നജുമ് മുവൈല ഗ്രോസറി",
+        location: "📍ഷോപ് #1, ബിൽഡിംഗ് #535, മുവൈല, ഷാർജ",
+        time: "🕒 എല്ലാ ദിവസവും: രാവിലെ 7 - രാത്രി 12",
+        wa: "📲 വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക",
+        maps: "📍 ഗൂഗിൾ മാപ്പിൽ ഞങ്ങളെ കാണുക",
+        quick: "🛒 വേഗത്തിൽ ഓർഡർ:",
+        milk: "പാൽ",
+        eggs: "മുട്ട",
+        bread: "ബ്രെഡ്",
+        rice: "അരി",
+        water: "വെള്ളം",
+        veg: "പച്ചക്കറി",
+        cartTitle: "🛒 കാർട്ട്",
+        noItems: "ശൂന്യം",
+        checkoutMsg: "ഹായ്, എനിക്ക് വേണം:",
+        options: {
+            Milk: ["200 ml","360 ml","500 ml","1 litre","2 litre"],
+            Eggs: ["6 pieces","15 pieces","30 pieces"],
+            Bread: ["Arabic Bread White Big (6 pcs)","Arabic Bread White Small (4 pcs)","Arabic Bread Brown Small (4 pcs)","Slice White Bread Big (600 grams)","Slice White Bread Small (300 grams)","Slice Milk Bread Big (600 grams)","Slice Milk Bread Small (325 grams)","Burger Bun (6 Pcs)","Samoon (6 pcs)","Sandwitch (Chocolate)","Sandwitch (Zatar)","Sandwitch (Cheese)","Sandwitch (Chicken Mayonese)"],
+            Rice: ["A1 Rice Basmati (1 kg)","Rice Basmati (5 kg)","Rice Basmati (10 kg)","Sinnara Rice (1 kg)","Sinnara Rice (2 kg)","Sinnara Rice (10 kg)","Sunwhite Rice (1 kg)","Sunwhite Rice (2 kg)","Sunwhite Rice (5 kg)","Matta Rice (1 kg)","Matta Rice (2 kg)","Matta Rice (5 kg)"],
+            Water: ["300 ml","500 ml","1.5 litres","5 litres","20 litres"]
+        }
+    }
+};
 
 function setLang(l) {
     lang = l;
-
-    const data = {
-        en: {
-            title: "Rukn Najm Muwailah Grocery",
-            location: "📍 Muweilah, Sharjah",
-            time: "🕒 Open Daily: 7:00 AM - 12:00 AM",
-            wa: "📲 Order on WhatsApp",
-            quick: "🛒 Quick Order:",
-            milk: "Milk",
-            eggs: "Eggs",
-            bread: "Bread",
-            rice: "Rice",
-            water: "Water",
-            veg: "Vegetables"
-        },
-        ar: {
-            title: "بقالة ركن نجم مويلح",
-            location: "📍 متجر1، مبنى535، مويلح، الشارقة",
-            time: "🕒 مفتوح يومياً: 7 صباحاً - 12 منتصف الليل",
-            wa: "📲 اطلب عبر واتساب",
-            quick: "🛒 طلب سريع:",
-            milk: "حليب",
-            eggs: "بيض",
-            bread: "خبز",
-            rice: "أرز",
-            water: "ماء",
-            veg: "خضروات"
-        },
-        ml: {
-            title: "റുകുന് നജുമ് മുവൈല ഗ്രോസറി",
-            location: "📍ഷോപ് #1, ബിൽഡിംഗ് #535, മുവൈല, ഷാർജ",
-            time: "🕒 എല്ലാ ദിവസവും: രാവിലെ 7 - രാത്രി 12",
-            wa: "📲 വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക",
-            quick: "🛒 വേഗത്തിൽ ഓർഡർ:",
-            milk: "പാൽ",
-            eggs: "മുട്ട",
-            bread: "ബ്രെഡ്",
-            rice: "അരി",
-            water: "വെള്ളം",
-            veg: "പച്ചക്കറി"
-        }
-    };
-
     document.getElementById('title').innerText = data[l].title;
     document.getElementById('location').innerText = data[l].location;
     document.getElementById('time').innerText = data[l].time;
     document.getElementById('waBtn').innerText = data[l].wa;
+    document.getElementById('mapsBtn').innerText = data[l].maps;
     document.getElementById('quick').innerText = data[l].quick;
-
     document.getElementById('milk').innerText = data[l].milk;
     document.getElementById('eggs').innerText = data[l].eggs;
     document.getElementById('bread').innerText = data[l].bread;
     document.getElementById('rice').innerText = data[l].rice;
     document.getElementById('water').innerText = data[l].water;
     document.getElementById('veg').innerText = data[l].veg;
+    document.getElementById('cartTitle').innerText = data[l].cartTitle;
+    renderCart();
 }
 
-function order(item) {
-    const messages = {
-        en: "Hi, I want to order ",
-        ar: "مرحبا، أريد طلب ",
-        ml: "ഹായ്, എനിക്ക് വേണം "
-    };
+// SELECT OPTION FUNCTION
+function selectOption(item){
+    currentItem = item;
+    const options = data[lang].options[item];
+    const popup = document.getElementById("selectionPopup");
+    const selectEl = document.getElementById("selectionOptions");
+    const titleEl = document.getElementById("selectionTitle");
+    titleEl.innerText = "Select " + data[lang][item.toLowerCase()];
+    selectEl.innerHTML = "";
+    options.forEach(opt => {
+        let o = document.createElement("option");
+        o.value = opt;
+        o.text = opt;
+        selectEl.add(o);
+    });
+    popup.style.display = "block";
+}
 
-    let msg = messages[lang] + item;
-    let url = "https://wa.me/971509649695?text=" + encodeURIComponent(msg);
-    window.open(url, '_blank');
+// CONFIRM SELECTION
+function confirmSelection(){
+    const sel = document.getElementById("selectionOptions").value;
+    addCart(currentItem + " - " + sel);
+    document.getElementById("selectionPopup").style.display="none";
+}
+
+function addCart(item){
+    cart[item] = (cart[item] || 0) + 1;
+    renderCart();
+}
+
+function renderCart(){
+    let html="";
+    for(let key in cart){
+        html += `${key} x ${cart[key]}<br>`;
+    }
+    document.getElementById("cartItems").innerHTML = html || data[lang].noItems;
+}
+
+function checkout(){
+    let msg = data[lang].checkoutMsg + "\n";
+    for(let key in cart){
+        msg += `${key} x ${cart[key]}\n`;
+    }
+    if(Object.keys(cart).length===0) msg += "No items selected";
+    let url = "https://wa.me/971509649695?text="+encodeURIComponent(msg);
+    window.open(url,'_blank');
 }
 
 setLang('en');
-document.getElementById("waBtn").href =
-"https://wa.me/971509649695?text=Hi%20I%20want%20to%20order%20groceries";
 </script>
-
 </body>
 </html>
