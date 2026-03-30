@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rukn Najm Muwailah Grocery</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        text-align: center;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('https://images.unsplash.com/photo-1542838132-92c53300491e') no-repeat center/cover;
+    }
+
+    body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.65);
+        z-index: 0;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        background: rgba(0,0,0,0.6);
+        padding: 25px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 420px;
+        backdrop-filter: blur(10px);
+    }
+
+    h1 { font-size: 22px; }
+
+    p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #ddd;
+    }
+
+    .btn {
+        display: block;
+        margin: 10px auto;
+        padding: 12px;
+        border-radius: 30px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        width: 85%;
+    }
+
+    .whatsapp { background: #25D366; }
+    .maps { background: #EA4335; }
+
+    .products { margin-top: 10px; }
+
+    .product-btn {
+        display: inline-block;
+        margin: 5px;
+        padding: 8px 12px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.2);
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .lang-switch {
+        margin-bottom: 10px;
+    }
+
+    .lang-switch button {
+        margin: 3px;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LANGUAGE SWITCH -->
+    <div class="lang-switch">
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('ar')">عربي</button>
+        <button onclick="setLang('ml')">മലയാളം</button>
+    </div>
+
+    <h1 id="title">Rukn Najm Muwailah Grocery</h1>
+    <p id="location">📍 Shop#1, Bulding 535, Muweilah, Sharjah</p>
+    <p id="time">🕒 Open Daily: 7:00 AM - 12:00 AM</p>
+
+    <a id="waBtn" class="btn whatsapp" href="#" target="_blank">📲 Order on WhatsApp</a>
+    <a id="mapBtn" class="btn maps" href="https://maps.app.goo.gl/vY7moLEHgmpVTnhe6" target="_blank">📍 Find Us</a>
+
+    <div class="products">
+        <p id="quick">🛒 Quick Order:</p>
+
+        <div class="product-btn" onclick="order('Milk')">🥛</div>
+        <div class="product-btn" onclick="order('Eggs')">🥚</div>
+        <div class="product-btn" onclick="order('Bread')">🍞</div>
+        <div class="product-btn" onclick="order('Rice')">🍚</div>
+        <div class="product-btn" onclick="order('Water')">💧</div>
+        <div class="product-btn" onclick="order('Vegetables')">🥦</div>
+    </div>
+
+</div>
+
+<script>
+let lang = 'en';
+
+function setLang(l) {
+    lang = l;
+
+    const data = {
+        en: {
+            title: "Rukn Najm Muwailah Grocery",
+            location: "📍 Muweilah, Sharjah",
+            time: "🕒 Open Daily: 7:00 AM - 12:00 AM",
+            wa: "📲 Order on WhatsApp",
+            map: "📍 Find Us",
+            quick: "🛒 Quick Order:",
+            msg: "Hi, I want to order "
+        },
+        ar: {
+            title: "بقالة ركن نجم مويلح",
+            location: "📍 المتجر رقم 1، المبنى رقم 535، مويلح، الشارقة",
+            time: "🕒 مفتوح يومياً: 7 صباحاً - 12 منتصف الليل",
+            wa: "📲 اطلب عبر واتساب",
+            map: "📍 موقعنا",
+            quick: "🛒 طلب سريع:",
+            msg: "مرحبا، أريد طلب "
+        },
+        ml: {
+            title: "റുകുന് നജുമ് മുവൈല ഗ്രോസറി",
+            location: "📍 ഷോപ് # 1, ബിൽഡിങ്ങ് 535, മുവൈല, ഷാർജ",
+            time: "🕒 എല്ലാ ദിവസവും: രാവിലെ 7 - രാത്രി 12",
+            wa: "📲 വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക",
+            map: "📍 ലൊക്കേഷൻ കാണുക",
+            quick: "🛒 വേഗത്തിൽ ഓർഡർ:",
+            msg: "ഹായ്, എനിക്ക് വേണം "
+        }
+    };
+
+    document.getElementById('title').innerText = data[l].title;
+    document.getElementById('location').innerText = data[l].location;
+    document.getElementById('time').innerText = data[l].time;
+    document.getElementById('waBtn').innerText = data[l].wa;
+    document.getElementById('mapBtn').innerText = data[l].map;
+    document.getElementById('quick').innerText = data[l].quick;
+}
+
+function order(item) {
+    const messages = {
+        en: "Hi, I want to order ",
+        ar: "مرحبا، أريد طلب ",
+        ml: "ഹായ്, എനിക്ക് വേണം "
+    };
+
+    let msg = messages[lang] + item;
+    let url = "https://wa.me/971509649695?text=" + encodeURIComponent(msg);
+    window.open(url, '_blank');
+}
+
+/* default button link */
+setLang('en');
+document.getElementById("waBtn").href =
+"https://wa.me/971509649695?text=Hi%20I%20want%20to%20order%20groceries";
+</script>
+
+</body>
+</html>
