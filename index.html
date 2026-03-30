@@ -60,20 +60,32 @@
     .whatsapp { background: #25D366; }
     .maps { background: #EA4335; }
 
-    .products { margin-top: 10px; }
-
-    .product-btn {
-        display: inline-block;
-        margin: 5px;
-        padding: 8px 12px;
-        border-radius: 20px;
-        background: rgba(255,255,255,0.2);
-        cursor: pointer;
-        font-size: 13px;
+    .products {
+        margin-top: 15px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
 
-    .lang-switch {
-        margin-bottom: 10px;
+    .product-btn {
+        background: rgba(255,255,255,0.15);
+        padding: 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .product-btn:hover {
+        background: #25D366;
+    }
+
+    .icon {
+        font-size: 22px;
+    }
+
+    .label {
+        font-size: 12px;
+        margin-top: 5px;
     }
 
     .lang-switch button {
@@ -99,21 +111,45 @@
     </div>
 
     <h1 id="title">Rukn Najm Muwailah Grocery</h1>
-    <p id="location">📍 Shop#1, Bulding 535, Muweilah, Sharjah</p>
+    <p id="location">📍 Muweilah, Sharjah</p>
     <p id="time">🕒 Open Daily: 7:00 AM - 12:00 AM</p>
 
     <a id="waBtn" class="btn whatsapp" href="#" target="_blank">📲 Order on WhatsApp</a>
-    <a id="mapBtn" class="btn maps" href="https://maps.app.goo.gl/vY7moLEHgmpVTnhe6" target="_blank">📍 Find Us</a>
+    <a class="btn maps" href="https://maps.app.goo.gl/vY7moLEHgmpVTnhe6" target="_blank">📍 Find Us</a>
 
+    <p id="quick">🛒 Quick Order:</p>
+
+    <!-- PRODUCTS -->
     <div class="products">
-        <p id="quick">🛒 Quick Order:</p>
+        <div class="product-btn" onclick="order('Milk')">
+            <div class="icon">🥛</div>
+            <div class="label" id="milk">Milk</div>
+        </div>
 
-        <div class="product-btn" onclick="order('Milk')">🥛</div>
-        <div class="product-btn" onclick="order('Eggs')">🥚</div>
-        <div class="product-btn" onclick="order('Bread')">🍞</div>
-        <div class="product-btn" onclick="order('Rice')">🍚</div>
-        <div class="product-btn" onclick="order('Water')">💧</div>
-        <div class="product-btn" onclick="order('Vegetables')">🥦</div>
+        <div class="product-btn" onclick="order('Eggs')">
+            <div class="icon">🥚</div>
+            <div class="label" id="eggs">Eggs</div>
+        </div>
+
+        <div class="product-btn" onclick="order('Bread')">
+            <div class="icon">🍞</div>
+            <div class="label" id="bread">Bread</div>
+        </div>
+
+        <div class="product-btn" onclick="order('Rice')">
+            <div class="icon">🍚</div>
+            <div class="label" id="rice">Rice</div>
+        </div>
+
+        <div class="product-btn" onclick="order('Water')">
+            <div class="icon">💧</div>
+            <div class="label" id="water">Water</div>
+        </div>
+
+        <div class="product-btn" onclick="order('Vegetables')">
+            <div class="icon">🥦</div>
+            <div class="label" id="veg">Vegetables</div>
+        </div>
     </div>
 
 </div>
@@ -130,27 +166,39 @@ function setLang(l) {
             location: "📍 Muweilah, Sharjah",
             time: "🕒 Open Daily: 7:00 AM - 12:00 AM",
             wa: "📲 Order on WhatsApp",
-            map: "📍 Find Us",
             quick: "🛒 Quick Order:",
-            msg: "Hi, I want to order "
+            milk: "Milk",
+            eggs: "Eggs",
+            bread: "Bread",
+            rice: "Rice",
+            water: "Water",
+            veg: "Vegetables"
         },
         ar: {
             title: "بقالة ركن نجم مويلح",
-            location: "📍 المتجر رقم 1، المبنى رقم 535، مويلح، الشارقة",
+            location: "📍 مويلح، الشارقة",
             time: "🕒 مفتوح يومياً: 7 صباحاً - 12 منتصف الليل",
             wa: "📲 اطلب عبر واتساب",
-            map: "📍 موقعنا",
             quick: "🛒 طلب سريع:",
-            msg: "مرحبا، أريد طلب "
+            milk: "حليب",
+            eggs: "بيض",
+            bread: "خبز",
+            rice: "أرز",
+            water: "ماء",
+            veg: "خضروات"
         },
         ml: {
-            title: "റുകുന് നജുമ് മുവൈല ഗ്രോസറി",
-            location: "📍 ഷോപ് # 1, ബിൽഡിങ്ങ് 535, മുവൈല, ഷാർജ",
+            title: "റുക്‌ന നജ്മ് മുയിലഹ് ഗ്രോസറി",
+            location: "📍 മുയിലഹ്, ഷാർജ",
             time: "🕒 എല്ലാ ദിവസവും: രാവിലെ 7 - രാത്രി 12",
             wa: "📲 വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക",
-            map: "📍 ലൊക്കേഷൻ കാണുക",
             quick: "🛒 വേഗത്തിൽ ഓർഡർ:",
-            msg: "ഹായ്, എനിക്ക് വേണം "
+            milk: "പാൽ",
+            eggs: "മുട്ട",
+            bread: "ബ്രെഡ്",
+            rice: "അരി",
+            water: "വെള്ളം",
+            veg: "പച്ചക്കറി"
         }
     };
 
@@ -158,8 +206,14 @@ function setLang(l) {
     document.getElementById('location').innerText = data[l].location;
     document.getElementById('time').innerText = data[l].time;
     document.getElementById('waBtn').innerText = data[l].wa;
-    document.getElementById('mapBtn').innerText = data[l].map;
     document.getElementById('quick').innerText = data[l].quick;
+
+    document.getElementById('milk').innerText = data[l].milk;
+    document.getElementById('eggs').innerText = data[l].eggs;
+    document.getElementById('bread').innerText = data[l].bread;
+    document.getElementById('rice').innerText = data[l].rice;
+    document.getElementById('water').innerText = data[l].water;
+    document.getElementById('veg').innerText = data[l].veg;
 }
 
 function order(item) {
@@ -174,7 +228,6 @@ function order(item) {
     window.open(url, '_blank');
 }
 
-/* default button link */
 setLang('en');
 document.getElementById("waBtn").href =
 "https://wa.me/971509649695?text=Hi%20I%20want%20to%20order%20groceries";
