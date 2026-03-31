@@ -6,9 +6,15 @@
 <title>Rukn Najm Muwailah Grocery</title>
 
 <style>
+    :root {
+        --primary-green: #25D366;
+        --error-red: #EA4335;
+        --bg-overlay: rgba(0,0,0,0.75);
+    }
+
     body {
         margin: 0;
-        font-family: 'Segoe UI', sans-serif;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         color: white;
         text-align: center;
         min-height: 100vh;
@@ -32,145 +38,107 @@
         z-index: 1;
         background: rgba(0,0,0,0.6);
         padding: 20px;
-        border-radius: 20px;
-        width: 90%;
+        border-radius: 24px;
+        width: 92%;
         max-width: 420px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
+
+    @keyframes pop {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .animate-pop { animation: pop 0.3s ease-out; }
 
     .lang-switch button {
         margin: 5px;
-        padding: 8px 12px;
-        border: none;
-        border-radius: 10px;
+        padding: 8px 14px;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 12px;
         cursor: pointer;
-        background: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.1);
         color: white;
-        font-weight: bold;
+        font-weight: 600;
     }
 
-    h1 { font-size: 20px; margin-bottom: 5px; }
-    .header-info { font-size: 14px; color: #ddd; margin: 5px 0; }
+    .header-info { font-size: 13px; color: #ccc; margin: 4px 0; }
 
-    .btn-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin: 15px 0;
-    }
-
+    .btn-container { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
     .btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px;
-        border-radius: 30px;
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        width: 90%;
-        margin: 0 auto;
+        display: flex; align-items: center; justify-content: center;
+        padding: 12px; border-radius: 15px; text-decoration: none;
+        color: white; font-weight: bold; width: 100%; box-sizing: border-box;
     }
-
-    .whatsapp { background: #25D366; }
+    .whatsapp { background: var(--primary-green); }
     .call { background: #007AFF; }
-    .maps { background: #EA4335; }
-
+    .maps { background: var(--error-red); }
     .btn img { width: 20px; margin-right: 10px; }
 
-    .quick-order-title {
-        margin-top: 20px;
-        font-weight: bold;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-        padding-bottom: 5px;
-    }
-
     .products {
-        margin-top: 15px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 12px;
+        margin-top: 15px;
     }
-
     .product-btn {
-        background: rgba(255,255,255,0.15);
-        padding: 10px;
-        border-radius: 15px;
+        background: rgba(255,255,255,0.1);
+        padding: 12px 5px;
+        border-radius: 18px;
         cursor: pointer;
+        border: 1px solid rgba(255,255,255,0.05);
+        transition: 0.2s;
     }
+    
+    .product-btn img {
+        width: 60px; height: 60px;
+        object-fit: cover; border-radius: 12px; margin-bottom: 8px;
+    }
+    .product-label { font-size: 11px; font-weight: 500; }
 
     .selection-popup {
-        display: none;
-        position: fixed;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        background: #222;
-        padding: 20px;
-        border-radius: 20px;
-        z-index: 100;
-        width: 85%;
-        max-width: 350px;
+        display: none; position: fixed; top: 50%; left: 50%;
+        transform: translate(-50%, -50%); background: #1a1a1a;
+        padding: 25px; border-radius: 24px; z-index: 100;
+        width: 85%; max-width: 340px;
     }
-
-    select { width: 100%; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: #333; color: white; border: 1px solid #555; }
+    select, textarea, input {
+        width: 100%; padding: 12px; border-radius: 12px; margin-bottom: 12px;
+        background: #2a2a2a; color: white; border: 1px solid #444; box-sizing: border-box;
+    }
 
     .cart {
-        margin-top: 20px;
-        background: rgba(0,0,0,0.5);
-        padding: 15px;
-        border-radius: 15px;
-        text-align: left;
+        margin-top: 25px; background: rgba(0,0,0,0.4);
+        padding: 20px; border-radius: 20px; text-align: left;
     }
-
-    .cart-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
     .cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        font-size: 14px;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+        font-size: 13px;
     }
+    .remove-btn { color: var(--error-red); background: none; border: none; font-size: 18px; cursor: pointer; }
 
-    .remove-btn {
-        color: #EA4335;
-        background: none;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        padding: 0 10px;
+    #successOverlay {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: var(--bg-overlay); z-index: 1000;
+        flex-direction: column; justify-content: center; align-items: center;
+        backdrop-filter: blur(8px);
     }
-
-    .clear-cart-btn {
-        background: rgba(234, 67, 53, 0.2);
-        color: #EA4335;
-        border: 1px solid #EA4335;
-        padding: 4px 8px;
-        border-radius: 5px;
-        font-size: 11px;
-        cursor: pointer;
-    }
-
-    .checkout {
-        background: #25D366;
-        padding: 12px;
-        width: 100%;
-        margin-top: 10px;
-        border-radius: 20px;
-        color: white;
-        font-weight: bold;
-        border: none;
+    .checkmark-circle {
+        width: 70px; height: 70px; border-radius: 50%;
+        background: var(--primary-green); display: flex;
+        justify-content: center; align-items: center; font-size: 35px;
+        margin-bottom: 15px;
     }
 </style>
 </head>
 <body>
+
+<div id="successOverlay">
+    <div class="checkmark-circle">✓</div>
+    <h2 id="processingText">Processing Order...</h2>
+</div>
 
 <div class="container">
     <div class="lang-switch">
@@ -185,42 +153,63 @@
     
     <div class="btn-container">
         <a id="waBtn" class="btn whatsapp" href="https://wa.me/971509649695" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
-            Order on WhatsApp
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"> Order on WhatsApp
         </a>
         <a id="callBtn" class="btn call" href="tel:+971509649695">📞 Call Now</a>
-        <a id="mapsBtn" class="btn maps" href="https://maps.app.goo.gl/wpVL24maYBkWd5er9" target="_blank">📍 Google Maps</a>
+        <a id="mapsBtn" class="btn maps" href="https://maps.google.com/?cid=6500354278498518338&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNl" target="_blank">📍 Google Maps</a>
     </div>
 
-    <div class="quick-order-title" id="quickOrderLabel">Quick Order</div>
+    <div class="quick-order-title" id="quickOrderLabel" style="font-weight: bold; border-bottom: 1px solid #555; padding-bottom: 5px; margin-bottom: 10px;">Quick Order</div>
 
-    <div class="products">
-        <div class="product-btn" onclick="openPopup('Milk')">🥛<div id="milkLabel">Milk</div></div>
-        <div class="product-btn" onclick="openPopup('Eggs')">🥚<div id="eggsLabel">Eggs</div></div>
-        <div class="product-btn" onclick="openPopup('Bread')">🍞<div id="breadLabel">Bread</div></div>
-        <div class="product-btn" onclick="openPopup('Rice')">🍚<div id="riceLabel">Rice</div></div>
-        <div class="product-btn" onclick="openPopup('Water')">💧<div id="waterLabel">Water</div></div>
-        <div class="product-btn" onclick="openPopup('Vegetables')">🥦<div id="vegLabel">Vegetables</div></div>
+<div class="products">
+        <div class="product-btn" onclick="openPopup('Milk')">
+            <div style="font-size: 40px; margin-bottom: 8px;">🥛</div>
+            <div class="product-label" id="milkLabel">Milk</div>
+        </div>
+        <div class="product-btn" onclick="openPopup('Eggs')">
+            <div style="font-size: 40px; margin-bottom: 8px;">🥚</div>
+            <div class="product-label" id="eggsLabel">Eggs</div>
+        </div>
+        <div class="product-btn" onclick="openPopup('Bread')">
+            <div style="font-size: 40px; margin-bottom: 8px;">🍞</div>
+            <div class="product-label" id="breadLabel">Bread</div>
+        </div>
+        <div class="product-btn" onclick="openPopup('Rice')">
+            <div style="font-size: 40px; margin-bottom: 8px;">🍚</div>
+            <div class="product-label" id="riceLabel">Rice</div>
+        </div>
+        <div class="product-btn" onclick="openPopup('Water')">
+            <div style="font-size: 40px; margin-bottom: 8px;">💧</div>
+            <div class="product-label" id="waterLabel">Water</div>
+        </div>
+        <div class="product-btn" onclick="openPopup('Vegetables')">
+            <div style="font-size: 40px; margin-bottom: 8px;">🥗</div>
+            <div class="product-label" id="vegLabel">Vegetables</div>
+        </div>
     </div>
 
     <div id="selectionPopup" class="selection-popup">
         <h3 id="popupTitle">Select Option</h3>
         <select id="primarySelect"></select>
         <div id="vegWeightContainer" style="display:none;">
-            <p id="weightTitle" style="color:#25D366; font-weight:bold; margin-bottom:5px;">Select Weight:</p>
+            <p id="weightTitle" style="color:var(--primary-green); font-weight:bold; margin-bottom:5px;">Select Weight:</p>
             <select id="weightSelect"></select>
         </div>
-        <button class="checkout" onclick="confirmAddition()" id="addBtn">Add to Cart</button>
+        <button class="btn whatsapp" onclick="confirmAddition()" id="addBtn">Add to Cart</button>
         <button onclick="closePopup()" style="background:none; border:none; color:gray; margin-top:10px; cursor:pointer;">Cancel</button>
     </div>
 
-    <div class="cart">
-        <div class="cart-header">
-            <h3 id="cartHeader" style="margin:0;">🛒 Cart</h3>
-            <button id="clearBtn" class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    <div class="cart" id="cartSection">
+        <h3 id="cartHeader" style="margin:0;">🛒 Cart</h3>
+        <div id="cartItems" style="margin: 15px 0;">Empty</div>
+        
+        <div id="deliveryForm" style="display:none;">
+            <input type="text" id="addressInput">
+            <textarea id="noteInput" rows="2"></textarea>
         </div>
-        <div id="cartItems">Empty</div>
-        <button class="checkout" onclick="checkout()" id="sendBtn">📲 Send Order</button>
+
+        <button class="btn whatsapp" onclick="checkout()" id="sendBtn">📲 Send Order</button>
+        <button id="clearBtn" onclick="clearCart()" style="background:none; border:none; color:#999; font-size:11px; width:100%; margin-top:10px; cursor:pointer;">Clear All</button>
     </div>
 </div>
 
@@ -232,12 +221,11 @@ let currentCategory = '';
 const data = {
     en: {
         title: "Rukn Najm Muwailah Grocery",
-        location: "📍 Shop #1, Building #535, Muweilah, Sharjah",
-        time: "🕒 Open Daily: 7:00 AM - 12:00 AM",
-        wa: "Order on WhatsApp", call: "Call Now", maps: "📍 Google Maps", quick: "Quick Order",
+        wa: "Order on WhatsApp", call: "Call Now", maps: "📍 Google Maps",
         milkLabel: "Milk", eggsLabel: "Eggs", breadLabel: "Bread", riceLabel: "Rice", waterLabel: "Water", vegLabel: "Vegetables",
-        cartHeader: "🛒 Cart", cartEmpty: "Empty", add: "Add to Cart", send: "📲 Send Order", weightLabel: "Select Weight:", clear: "Clear Cart",
-        confirmClear: "Are you sure you want to clear the cart?",
+        cartHeader: "🛒 Cart", cartEmpty: "Empty", add: "Add to Cart", send: "📲 Send Order", weightLabel: "Select Weight:",
+        clear: "Clear All Items", addrPlace: "Building Name/No & Flat No.", notePlace: "Special Instructions...",
+        processing: "Processing Order...",
         options: {
             Milk: ["200 ml", "360 ml", "500 ml", "1 litre", "2 litre"],
             Eggs: ["6 pieces", "15 pieces", "30 pieces"],
@@ -250,12 +238,11 @@ const data = {
     },
     ar: {
         title: "بقالة ركن نجم مويلح",
-        location: "📍 محل رقم 1، بناية رقم 535، مويلح، الشارقة",
-        time: "🕒 مفتوح يومياً: 7:00 صباحاً - 12:00 منتصف الليل",
-        wa: "اطلب عبر واتساب", call: "اتصل الآن", maps: "📍 خرائط جوجل", quick: "طلب سريع",
+        wa: "اطلب عبر واتساب", call: "اتصل الآن", maps: "📍 خرائط جوجل",
         milkLabel: "حليب", eggsLabel: "بيض", breadLabel: "خبز", riceLabel: "أرز", waterLabel: "ماء", vegLabel: "خضروات",
-        cartHeader: "🛒 السلة", cartEmpty: "فارغة", add: "إضافة للسلة", send: "📲 إرسال الطلب", weightLabel: "اختر الوزن:", clear: "مسح السلة",
-        confirmClear: "هل أنت متأكد من مسح السلة؟",
+        cartHeader: "🛒 السلة", cartEmpty: "فارغة", add: "إضافة للسلة", send: "📲 إرسال الطلب", weightLabel: "اختر الوزن:",
+        clear: "مسح الكل", addrPlace: "اسم البناية ورقم الشقة", notePlace: "ملاحظات خاصة...",
+        processing: "جاري الطلب...",
         options: {
             Milk: ["200 مل", "360 مل", "500 مل", "1 لتر", "2 لتر"],
             Eggs: ["6 قطع", "15 قطعة", "30 قطعة"],
@@ -268,12 +255,11 @@ const data = {
     },
     ml: {
         title: "റുകുന് നജുമ് മുവൈല ഗ്രോസറി",
-        location: "📍 ഷോപ്പ് #1, ബിൽഡിംഗ് #535, മുവൈല, ഷാർജ",
-        time: "🕒 എല്ലാ ദിവസവും: രാവിലെ 7:00 - രാത്രി 12:00",
-        wa: "വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക", call: "വിളിക്കുക", maps: "📍 ഗൂഗിൾ മാപ്പ്", quick: "വേഗത്തിൽ ഓർഡർ ചെയ്യാം",
+        wa: "വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക", call: "വിളിക്കുക", maps: "📍 ഗൂഗിൾ മാപ്പ്",
         milkLabel: "പാൽ", eggsLabel: "മുട്ട", breadLabel: "ബ്രെഡ്", riceLabel: "അരി", waterLabel: "വെള്ളം", vegLabel: "പച്ചക്കറി",
-        cartHeader: "🛒 കാർട്ട്", cartEmpty: "ശൂന്യം", add: "കാർട്ടിലേക്ക് ചേർക്കുക", send: "📲 ഓർഡർ അയക്കുക", weightLabel: "അളവ് തിരഞ്ഞെടുക്കുക:", clear: "കാർട്ട് ഒഴിവാക്കുക",
-        confirmClear: "കാർട്ട് ഒഴിവാക്കണോ?",
+        cartHeader: "🛒 കാർട്ട്", cartEmpty: "ശൂന്യം", add: "കാർട്ടിലേക്ക് ചേർക്കുക", send: "📲 ഓർഡർ അയക്കുക", weightLabel: "അളവ് തിരഞ്ഞെടുക്കുക:",
+        clear: "എല്ലാം ഒഴിവാക്കുക", addrPlace: "കെട്ടിടം, ഫ്ലാറ്റ് നമ്പർ", notePlace: "നിർദ്ദേശങ്ങൾ...",
+        processing: "ഓർഡർ ചെയ്യുന്നു...",
         options: {
             Milk: ["200 ml", "360 ml", "500 ml", "1 ലിറ്റർ", "2 ലിറ്റർ"],
             Eggs: ["6 എണ്ണം", "15 എണ്ണം", "30 എണ്ണം"],
@@ -287,15 +273,11 @@ const data = {
 };
 
 function setLang(l) {
-    lang = l;
-    const d = data[l];
+    lang = l; const d = data[l];
     document.getElementById('title').innerText = d.title;
-    document.getElementById('location').innerText = d.location;
-    document.getElementById('time').innerText = d.time;
     document.getElementById('waBtn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"> ${d.wa}`;
     document.getElementById('callBtn').innerText = `📞 ${d.call}`;
     document.getElementById('mapsBtn').innerText = d.maps;
-    document.getElementById('quickOrderLabel').innerText = d.quick;
     document.getElementById('milkLabel').innerText = d.milkLabel;
     document.getElementById('eggsLabel').innerText = d.eggsLabel;
     document.getElementById('breadLabel').innerText = d.breadLabel;
@@ -305,34 +287,32 @@ function setLang(l) {
     document.getElementById('cartHeader').innerText = d.cartHeader;
     document.getElementById('addBtn').innerText = d.add;
     document.getElementById('sendBtn').innerText = d.send;
-    document.getElementById('weightTitle').innerText = d.weightLabel;
     document.getElementById('clearBtn').innerText = d.clear;
+    document.getElementById('addressInput').placeholder = d.addrPlace;
+    document.getElementById('noteInput').placeholder = d.notePlace;
+    document.getElementById('processingText').innerText = d.processing;
     renderCart();
 }
 
 function openPopup(cat) {
     currentCategory = cat;
-    const popup = document.getElementById('selectionPopup');
+    const labelKey = cat === 'Vegetables' ? 'vegLabel' : cat.toLowerCase() + 'Label';
+    document.getElementById('popupTitle').innerText = data[lang][labelKey];
     const select = document.getElementById('primarySelect');
-    const weightContainer = document.getElementById('vegWeightContainer');
-    const weightSelect = document.getElementById('weightSelect');
-    
-    document.getElementById('popupTitle').innerText = data[lang][cat.toLowerCase() + 'Label'];
     select.innerHTML = "";
     data[lang].options[cat].forEach(opt => {
         let o = document.createElement("option"); o.value = opt; o.text = opt; select.add(o);
     });
-
+    const weightContainer = document.getElementById('vegWeightContainer');
     if (cat === 'Vegetables') {
         weightContainer.style.display = "block";
-        weightSelect.innerHTML = "";
+        const wSelect = document.getElementById('weightSelect');
+        wSelect.innerHTML = "";
         data[lang].options.Weights.forEach(w => {
-            let o = document.createElement("option"); o.value = w; o.text = w; weightSelect.add(o);
+            let o = document.createElement("option"); o.value = w; o.text = w; wSelect.add(o);
         });
-    } else {
-        weightContainer.style.display = "none";
-    }
-    popup.style.display = "block";
+    } else { weightContainer.style.display = "none"; }
+    document.getElementById('selectionPopup').style.display = "block";
 }
 
 function closePopup() { document.getElementById('selectionPopup').style.display = "none"; }
@@ -340,46 +320,49 @@ function closePopup() { document.getElementById('selectionPopup').style.display 
 function confirmAddition() {
     const mainVal = document.getElementById('primarySelect').value;
     const weightVal = document.getElementById('weightSelect').value;
-    let finalItem = (currentCategory === 'Vegetables') ? `${mainVal} (${weightVal})` : mainVal;
-    cart[finalItem] = (cart[finalItem] || 0) + 1;
-    renderCart();
-    closePopup();
-}
-
-function removeFromCart(itemKey) {
-    delete cart[itemKey];
-    renderCart();
-}
-
-function clearCart() {
-    if(confirm(data[lang].confirmClear)) {
-        cart = {};
-        renderCart();
-    }
+    const labelKey = currentCategory === 'Vegetables' ? 'vegLabel' : currentCategory.toLowerCase() + 'Label';
+    const prod = data[lang][labelKey];
+    let item = (currentCategory === 'Vegetables') ? `${prod}: ${mainVal} (${weightVal})` : `${prod}: ${mainVal}`;
+    cart[item] = (cart[item] || 0) + 1;
+    const cartSec = document.getElementById('cartSection');
+    cartSec.classList.add('animate-pop');
+    setTimeout(() => cartSec.classList.remove('animate-pop'), 300);
+    renderCart(); closePopup();
 }
 
 function renderCart() {
-    let html = "";
-    let entries = Object.keys(cart);
+    let html = ""; let entries = Object.keys(cart);
     if (entries.length === 0) {
         html = data[lang].cartEmpty;
+        document.getElementById('deliveryForm').style.display = "none";
     } else {
         entries.forEach(key => {
-            html += `
-                <div class="cart-item">
-                    <span>• ${key} x ${cart[key]}</span>
-                    <button class="remove-btn" onclick="removeFromCart('${key}')">✕</button>
-                </div>`;
+            html += `<div class="cart-item"><span>• ${key} x ${cart[key]}</span>
+                     <button class="remove-btn" onclick="removeItem('${key}')">✕</button></div>`;
         });
+        document.getElementById('deliveryForm').style.display = "block";
     }
     document.getElementById('cartItems').innerHTML = html;
 }
 
+function removeItem(k) { delete cart[k]; renderCart(); }
+function clearCart() { cart = {}; renderCart(); }
+
 function checkout() {
-    if (Object.keys(cart).length === 0) return alert(data[lang].cartEmpty);
-    let msg = (lang === 'ar' ? "مرحبا، أريد طلب:\n" : lang === 'ml' ? "ഹായ്, എനിക്ക് ഓർഡർ ചെയ്യണം:\n" : "Hi, I want to order:\n");
-    for (let key in cart) { msg += `${key} x ${cart[key]}\n`; }
-    window.open("https://wa.me/971509649695?text=" + encodeURIComponent(msg), '_blank');
+    const items = Object.keys(cart);
+    if (items.length === 0) return alert("Cart is empty");
+    const address = document.getElementById('addressInput').value;
+    if (!address) return alert("Please enter your address");
+    const note = document.getElementById('noteInput').value;
+    document.getElementById('successOverlay').style.display = "flex";
+    setTimeout(() => {
+        let msg = `*New Order - Rukn Najm Muwailah*\n\n`;
+        items.forEach(k => msg += `• ${k} x ${cart[k]}\n`);
+        msg += `\n📍 *Address:* ${address}`;
+        if (note) msg += `\n📝 *Note:* ${note}`;
+        window.open("https://wa.me/971509649695?text=" + encodeURIComponent(msg), '_blank');
+        document.getElementById('successOverlay').style.display = "none";
+    }, 1500);
 }
 
 setLang('en');
