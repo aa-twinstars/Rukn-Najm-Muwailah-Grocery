@@ -6,231 +6,383 @@
 <title>Rukn Najm Muwailah Grocery</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('https://images.unsplash.com/photo-1542838132-92c53300491e') no-repeat center/cover;
-}
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        text-align: center;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('https://images.unsplash.com/photo-1542838132-92c53300491e') no-repeat center/cover;
+        background-attachment: fixed;
+    }
 
-body::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.65);
-    z-index: 0;
-}
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 0;
+    }
 
-.container {
-    position: relative;
-    z-index: 1;
-    background: rgba(0,0,0,0.6);
-    padding: 25px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 420px;
-    backdrop-filter: blur(10px);
-}
+    .container {
+        position: relative;
+        z-index: 1;
+        background: rgba(0,0,0,0.6);
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 420px;
+        backdrop-filter: blur(10px);
+    }
 
-h1 { font-size: 22px; }
-p { margin: 5px 0; font-size: 14px; color: #ddd; }
+    .lang-switch button {
+        margin: 5px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        font-weight: bold;
+    }
 
-.btn {
-    display: block;
-    margin: 10px auto;
-    padding: 12px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    width: 85%;
-}
+    h1 { font-size: 20px; margin-bottom: 5px; }
+    .header-info { font-size: 14px; color: #ddd; margin: 5px 0; }
 
-.whatsapp { background: #25D366; }
-.maps { background: #EA4335; }
-.call { background: #007BFF; }
+    .btn-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 15px 0;
+    }
 
-.products {
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        border-radius: 30px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        width: 90%;
+        margin: 0 auto;
+    }
 
-.product-btn {
-    background: rgba(255,255,255,0.15);
-    padding: 10px;
-    border-radius: 15px;
-    cursor: pointer;
-}
+    .whatsapp { background: #25D366; }
+    .call { background: #007AFF; }
+    .maps { background: #EA4335; }
 
-.icon { font-size: 22px; }
-.label { font-size: 12px; margin-top: 5px; }
+    .btn img { width: 20px; margin-right: 10px; }
 
-.cart {
-    margin-top: 20px;
-    background: rgba(0,0,0,0.6);
-    padding: 15px;
-    border-radius: 15px;
-    text-align: left;
-}
+    .quick-order-title {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding-bottom: 5px;
+    }
 
-.checkout {
-    background: #25D366;
-    padding: 10px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
+    .products {
+        margin-top: 15px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
 
-.selection-popup {
-    background: rgba(0,0,0,0.9);
-    padding: 15px;
-    border-radius: 15px;
-    margin-top: 10px;
-}
+    .product-btn {
+        background: rgba(255,255,255,0.15);
+        padding: 10px;
+        border-radius: 15px;
+        cursor: pointer;
+    }
 
-.selection-popup select, .selection-popup button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-}
+    .selection-popup {
+        display: none;
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: #222;
+        padding: 20px;
+        border-radius: 20px;
+        z-index: 100;
+        width: 85%;
+        max-width: 350px;
+    }
+
+    select { width: 100%; padding: 10px; border-radius: 10px; margin-bottom: 10px; background: #333; color: white; border: 1px solid #555; }
+
+    .cart {
+        margin-top: 20px;
+        background: rgba(0,0,0,0.5);
+        padding: 15px;
+        border-radius: 15px;
+        text-align: left;
+    }
+
+    .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        font-size: 14px;
+    }
+
+    .remove-btn {
+        color: #EA4335;
+        background: none;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+    .clear-cart-btn {
+        background: rgba(234, 67, 53, 0.2);
+        color: #EA4335;
+        border: 1px solid #EA4335;
+        padding: 4px 8px;
+        border-radius: 5px;
+        font-size: 11px;
+        cursor: pointer;
+    }
+
+    .checkout {
+        background: #25D366;
+        padding: 12px;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 20px;
+        color: white;
+        font-weight: bold;
+        border: none;
+    }
 </style>
 </head>
-
 <body>
 
 <div class="container">
-
-<h1>Rukn Najm Muwailah Grocery</h1>
-<p>📍 Shop #1, Building #535, Muweilah, Sharjah</p>
-<p>🕒 Open Daily: 7:00 AM - 12:00 AM</p>
-
-<!-- BUTTONS -->
-<a id="waBtn" class="btn whatsapp" href="https://wa.me/971509649695" target="_blank">
-📲 Order on WhatsApp
-</a>
-
-<a class="btn call" href="tel:+971509649695">
-📞 Call Now
-</a>
-
-<a class="btn maps" href="https://maps.app.goo.gl/vY7moLEHgmpVTnhe6" target="_blank">
-📍 Find us in Google Maps
-</a>
-
-<p>🛒 Quick Order:</p>
-
-<!-- PRODUCTS -->
-<div class="products">
-    <div class="product-btn" onclick="selectOption('Milk')">
-        <div class="icon">🥛</div><div class="label">Milk</div>
+    <div class="lang-switch">
+        <button onclick="setLang('en')">English</button>
+        <button onclick="setLang('ar')">عربي</button>
+        <button onclick="setLang('ml')">മലയാളം</button>
     </div>
 
-    <div class="product-btn" onclick="selectOption('Eggs')">
-        <div class="icon">🥚</div><div class="label">Eggs</div>
+    <h1 id="title">Rukn Najm Muwailah Grocery</h1>
+    <p id="location" class="header-info">📍 Shop #1, Building #535, Muweilah, Sharjah</p>
+    <p id="time" class="header-info">🕒 Open Daily: 7:00 AM - 12:00 AM</p>
+    
+    <div class="btn-container">
+        <a id="waBtn" class="btn whatsapp" href="https://wa.me/971509649695" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+            Order on WhatsApp
+        </a>
+        <a id="callBtn" class="btn call" href="tel:+971509649695">📞 Call Now</a>
+        <a id="mapsBtn" class="btn maps" href="https://maps.app.goo.gl/wpVL24maYBkWd5er9" target="_blank">📍 Google Maps</a>
     </div>
 
-    <div class="product-btn" onclick="selectOption('Bread')">
-        <div class="icon">🍞</div><div class="label">Bread</div>
+    <div class="quick-order-title" id="quickOrderLabel">Quick Order</div>
+
+    <div class="products">
+        <div class="product-btn" onclick="openPopup('Milk')">🥛<div id="milkLabel">Milk</div></div>
+        <div class="product-btn" onclick="openPopup('Eggs')">🥚<div id="eggsLabel">Eggs</div></div>
+        <div class="product-btn" onclick="openPopup('Bread')">🍞<div id="breadLabel">Bread</div></div>
+        <div class="product-btn" onclick="openPopup('Rice')">🍚<div id="riceLabel">Rice</div></div>
+        <div class="product-btn" onclick="openPopup('Water')">💧<div id="waterLabel">Water</div></div>
+        <div class="product-btn" onclick="openPopup('Vegetables')">🥦<div id="vegLabel">Vegetables</div></div>
     </div>
 
-    <div class="product-btn" onclick="selectOption('Rice')">
-        <div class="icon">🍚</div><div class="label">Rice</div>
+    <div id="selectionPopup" class="selection-popup">
+        <h3 id="popupTitle">Select Option</h3>
+        <select id="primarySelect"></select>
+        <div id="vegWeightContainer" style="display:none;">
+            <p id="weightTitle" style="color:#25D366; font-weight:bold; margin-bottom:5px;">Select Weight:</p>
+            <select id="weightSelect"></select>
+        </div>
+        <button class="checkout" onclick="confirmAddition()" id="addBtn">Add to Cart</button>
+        <button onclick="closePopup()" style="background:none; border:none; color:gray; margin-top:10px; cursor:pointer;">Cancel</button>
     </div>
 
-    <div class="product-btn" onclick="selectOption('Water')">
-        <div class="icon">💧</div><div class="label">Water</div>
+    <div class="cart">
+        <div class="cart-header">
+            <h3 id="cartHeader" style="margin:0;">🛒 Cart</h3>
+            <button id="clearBtn" class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+        </div>
+        <div id="cartItems">Empty</div>
+        <button class="checkout" onclick="checkout()" id="sendBtn">📲 Send Order</button>
     </div>
-
-    <div class="product-btn" onclick="addCart('Vegetables')">
-        <div class="icon">🥦</div><div class="label">Vegetables</div>
-    </div>
-</div>
-
-<!-- POPUP -->
-<div id="selectionPopup" class="selection-popup" style="display:none;">
-    <div id="selectionTitle"></div>
-    <select id="selectionOptions"></select>
-    <button onclick="confirmSelection()">Add to Cart</button>
-</div>
-
-<!-- CART -->
-<div class="cart">
-    <h3>🛒 Cart</h3>
-    <div id="cartItems">Empty</div>
-    <button class="checkout" onclick="checkout()">📲 Send Order</button>
-</div>
-
 </div>
 
 <script>
+let lang = 'en';
 let cart = {};
-let currentItem = null;
+let currentCategory = '';
 
-const options = {
-Milk: ["200 ml","360 ml","500 ml","1 litre","2 litre"],
-Eggs: ["6 pcs","15 pcs","30 pcs"],
-Bread: ["Arabic Bread White Big","Burger Bun","Samoon","Sandwich"],
-Rice: ["1 kg","5 kg","10 kg"],
-Water: ["300 ml","500 ml","1.5L","5L","20L"]
+const data = {
+    en: {
+        title: "Rukn Najm Muwailah Grocery",
+        location: "📍 Shop #1, Building #535, Muweilah, Sharjah",
+        time: "🕒 Open Daily: 7:00 AM - 12:00 AM",
+        wa: "Order on WhatsApp", call: "Call Now", maps: "📍 Google Maps", quick: "Quick Order",
+        milkLabel: "Milk", eggsLabel: "Eggs", breadLabel: "Bread", riceLabel: "Rice", waterLabel: "Water", vegLabel: "Vegetables",
+        cartHeader: "🛒 Cart", cartEmpty: "Empty", add: "Add to Cart", send: "📲 Send Order", weightLabel: "Select Weight:", clear: "Clear Cart",
+        confirmClear: "Are you sure you want to clear the cart?",
+        options: {
+            Milk: ["200 ml", "360 ml", "500 ml", "1 litre", "2 litre"],
+            Eggs: ["6 pieces", "15 pieces", "30 pieces"],
+            Bread: ["Arabic Bread White Big (6 pcs)", "Arabic Bread White Small (4 pcs)", "Arabic Bread Brown Small (4 pcs)", "Slice White Bread Big (600 grams)", "Slice White Bread Small (300 grams)", "Slice Milk Bread Big (600 grams)", "Slice Milk Bread Small (325 grams)", "Burger Bun (6 Pcs)", "Samoon (6 pcs)", "Sandwitch (Chocolate)", "Sandwitch (Zatar)", "Sandwitch (Cheese)", "Sandwitch (Chicken Mayonese)"],
+            Rice: ["A1 Rice Basmati (1 kg)", "Rice Basmati (5 kg)", "Rice Basmati (10 kg)", "Sinnara Rice (1 kg)", "Sinnara Rice (2 kg)", "Sinnara Rice (10 kg)", "Sunwhite Rice (1 kg)", "Sunwhite Rice (2 kg)", "Sunwhite Rice (5 kg)", "Matta Rice (1 kg)", "Matta Rice (2 kg)", "Matta Rice (5 kg)"],
+            Water: ["300 ml", "500 ml", "1.5 litres", "5 litres", "20 litres"],
+            Vegetables: ["Tomato", "Onion Big", "Potato", "Chilli"],
+            Weights: ["250g", "500g", "1kg", "2kg", "5kg"]
+        }
+    },
+    ar: {
+        title: "بقالة ركن نجم مويلح",
+        location: "📍 محل رقم 1، بناية رقم 535، مويلح، الشارقة",
+        time: "🕒 مفتوح يومياً: 7:00 صباحاً - 12:00 منتصف الليل",
+        wa: "اطلب عبر واتساب", call: "اتصل الآن", maps: "📍 خرائط جوجل", quick: "طلب سريع",
+        milkLabel: "حليب", eggsLabel: "بيض", breadLabel: "خبز", riceLabel: "أرز", waterLabel: "ماء", vegLabel: "خضروات",
+        cartHeader: "🛒 السلة", cartEmpty: "فارغة", add: "إضافة للسلة", send: "📲 إرسال الطلب", weightLabel: "اختر الوزن:", clear: "مسح السلة",
+        confirmClear: "هل أنت متأكد من مسح السلة؟",
+        options: {
+            Milk: ["200 مل", "360 مل", "500 مل", "1 لتر", "2 لتر"],
+            Eggs: ["6 قطع", "15 قطعة", "30 قطعة"],
+            Bread: ["خبز عربي أبيض كبير (6 قطع)", "خبز عربي أبيض صغير (4 قطع)", "خبز عربي أسمر صغير (4 قطع)", "خبز توست أبيض كبير", "خبز توست أبيض صغير", "خبز توست بالحليب كبير", "خبز توست بالحليب صغير", "صمون برجر (6 قطع)", "صمون (6 قطع)", "ساندويتش (شوكولاتة)", "ساندويتش (زعتر)", "ساندويتش (جبنة)", "ساندويتش (دجاج مايونيز)"],
+            Rice: ["أرز بسمتي A1 (1 كجم)", "أرز بسمتي (5 كجم)", "أرز بسمتي (10 كجم)", "أرز سنارة (1 كجم)", "أرز سنارة (2 كجم)", "أرز سنارة (10 كجم)", "أرز صن وايت (1 كجم)", "أرز صن وايت (2 كجم)", "أرز صن وايت (5 كجم)", "أرز ماتا (1 كجم)", "أرز ماتا (2 كجم)", "أرز ماتا (5 كجم)"],
+            Water: ["300 مل", "500 مل", "1.5 لتر", "5 لتر", "20 لتر"],
+            Vegetables: ["طماطم", "بصل كبير", "بطاطس", "فلفل"],
+            Weights: ["250 جرام", "500 جرام", "1 كجم", "2 كجم", "5 كجم"]
+        }
+    },
+    ml: {
+        title: "റുകുന് നജുമ് മുവൈല ഗ്രോസറി",
+        location: "📍 ഷോപ്പ് #1, ബിൽഡിംഗ് #535, മുവൈല, ഷാർജ",
+        time: "🕒 എല്ലാ ദിവസവും: രാവിലെ 7:00 - രാത്രി 12:00",
+        wa: "വാട്ട്സാപ്പിൽ ഓർഡർ ചെയ്യുക", call: "വിളിക്കുക", maps: "📍 ഗൂഗിൾ മാപ്പ്", quick: "വേഗത്തിൽ ഓർഡർ ചെയ്യാം",
+        milkLabel: "പാൽ", eggsLabel: "മുട്ട", breadLabel: "ബ്രെഡ്", riceLabel: "അരി", waterLabel: "വെള്ളം", vegLabel: "പച്ചക്കറി",
+        cartHeader: "🛒 കാർട്ട്", cartEmpty: "ശൂന്യം", add: "കാർട്ടിലേക്ക് ചേർക്കുക", send: "📲 ഓർഡർ അയക്കുക", weightLabel: "അളവ് തിരഞ്ഞെടുക്കുക:", clear: "കാർട്ട് ഒഴിവാക്കുക",
+        confirmClear: "കാർട്ട് ഒഴിവാക്കണോ?",
+        options: {
+            Milk: ["200 ml", "360 ml", "500 ml", "1 ലിറ്റർ", "2 ലിറ്റർ"],
+            Eggs: ["6 എണ്ണം", "15 എണ്ണം", "30 എണ്ണം"],
+            Bread: ["അറബിക് ബ്രെഡ് വൈറ്റ് വലുത് (6 എണ്ണം)", "അറബിക് ബ്രെഡ് വൈറ്റ് ചെറുത് (4 എണ്ണം)", "അറബിക് ബ്രെഡ് ബ്രൗൺ ചെറുത് (4 എണ്ണം)", "സ്ലൈസ് വൈറ്റ് ബ്രെഡ് വലുത് (600g)", "സ്ലൈസ് വൈറ്റ് ബ്രെഡ് ചെറുത് (300g)", "സ്ലൈസ് മിൽക്ക് ബ്രെഡ് വലുത് (600g)", "സ്ലൈസ് മിൽക്ക് ബ്രെഡ് ചെറുത് (325g)", "ബർഗർ ബൺ (6 എണ്ണം)", "സമൂൺ (6 എണ്ണം)", "സാൻഡ്‌വിച്ച് (ചോക്ലേറ്റ്)", "സാൻഡ്‌വിച്ച് (സതർ)", "സാൻഡ്‌വിച്ച് (ചീസ്)", "സാൻഡ്‌വിച്ച് (ചിക്കൻ മയോണൈസ്)"],
+            Rice: ["A1 ബസുമതി അരി (1 kg)", "ബസുമതി അരി (5 kg)", "ബസുമതി അരി (10 kg)", "സിന്നാര അരി (1 kg)", "സിന്നാര അരി (2 kg)", "സിന്നാര അരി (10 kg)", "സൺവൈറ്റ് അരി (1 kg)", "സൺവൈറ്റ് അരി (2 kg)", "സൺവൈറ്റ് അരി (5 kg)", "മട്ട അരി (1 kg)", "മട്ട അരി (2 kg)", "മട്ട അരി (5 kg)"],
+            Water: ["300 ml", "500 ml", "1.5 ലിറ്റർ", "5 ലിറ്റർ", "20 ലിറ്റർ"],
+            Vegetables: ["തക്കാളി", "സവാള", "ഉരുളക്കിഴങ്ങ്", "പച്ചമുളക്"],
+            Weights: ["250g", "500g", "1kg", "2kg", "5kg"]
+        }
+    }
 };
 
-function selectOption(item){
-    currentItem = item;
-    let popup = document.getElementById("selectionPopup");
-    let select = document.getElementById("selectionOptions");
-
-    select.innerHTML="";
-    options[item].forEach(opt=>{
-        let o=document.createElement("option");
-        o.text=opt;
-        select.add(o);
-    });
-
-    document.getElementById("selectionTitle").innerText="Select "+item;
-    popup.style.display="block";
-}
-
-function confirmSelection(){
-    let sel=document.getElementById("selectionOptions").value;
-    addCart(currentItem+" - "+sel);
-    document.getElementById("selectionPopup").style.display="none";
-}
-
-function addCart(item){
-    cart[item]=(cart[item]||0)+1;
+function setLang(l) {
+    lang = l;
+    const d = data[l];
+    document.getElementById('title').innerText = d.title;
+    document.getElementById('location').innerText = d.location;
+    document.getElementById('time').innerText = d.time;
+    document.getElementById('waBtn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"> ${d.wa}`;
+    document.getElementById('callBtn').innerText = `📞 ${d.call}`;
+    document.getElementById('mapsBtn').innerText = d.maps;
+    document.getElementById('quickOrderLabel').innerText = d.quick;
+    document.getElementById('milkLabel').innerText = d.milkLabel;
+    document.getElementById('eggsLabel').innerText = d.eggsLabel;
+    document.getElementById('breadLabel').innerText = d.breadLabel;
+    document.getElementById('riceLabel').innerText = d.riceLabel;
+    document.getElementById('waterLabel').innerText = d.waterLabel;
+    document.getElementById('vegLabel').innerText = d.vegLabel;
+    document.getElementById('cartHeader').innerText = d.cartHeader;
+    document.getElementById('addBtn').innerText = d.add;
+    document.getElementById('sendBtn').innerText = d.send;
+    document.getElementById('weightTitle').innerText = d.weightLabel;
+    document.getElementById('clearBtn').innerText = d.clear;
     renderCart();
 }
 
-function renderCart(){
-    let html="";
-    for(let k in cart){
-        html+=k+" x "+cart[k]+"<br>";
+function openPopup(cat) {
+    currentCategory = cat;
+    const popup = document.getElementById('selectionPopup');
+    const select = document.getElementById('primarySelect');
+    const weightContainer = document.getElementById('vegWeightContainer');
+    const weightSelect = document.getElementById('weightSelect');
+    
+    document.getElementById('popupTitle').innerText = data[lang][cat.toLowerCase() + 'Label'];
+    select.innerHTML = "";
+    data[lang].options[cat].forEach(opt => {
+        let o = document.createElement("option"); o.value = opt; o.text = opt; select.add(o);
+    });
+
+    if (cat === 'Vegetables') {
+        weightContainer.style.display = "block";
+        weightSelect.innerHTML = "";
+        data[lang].options.Weights.forEach(w => {
+            let o = document.createElement("option"); o.value = w; o.text = w; weightSelect.add(o);
+        });
+    } else {
+        weightContainer.style.display = "none";
     }
-    document.getElementById("cartItems").innerHTML=html||"Empty";
+    popup.style.display = "block";
 }
 
-function checkout(){
-    let msg="Hi, I want to order:\n";
-    for(let k in cart){
-        msg+=k+" x "+cart[k]+"\n";
-    }
-    let url="https://wa.me/971509649695?text="+encodeURIComponent(msg);
-    window.open(url,'_blank');
+function closePopup() { document.getElementById('selectionPopup').style.display = "none"; }
+
+function confirmAddition() {
+    const mainVal = document.getElementById('primarySelect').value;
+    const weightVal = document.getElementById('weightSelect').value;
+    let finalItem = (currentCategory === 'Vegetables') ? `${mainVal} (${weightVal})` : mainVal;
+    cart[finalItem] = (cart[finalItem] || 0) + 1;
+    renderCart();
+    closePopup();
 }
+
+function removeFromCart(itemKey) {
+    delete cart[itemKey];
+    renderCart();
+}
+
+function clearCart() {
+    if(confirm(data[lang].confirmClear)) {
+        cart = {};
+        renderCart();
+    }
+}
+
+function renderCart() {
+    let html = "";
+    let entries = Object.keys(cart);
+    if (entries.length === 0) {
+        html = data[lang].cartEmpty;
+    } else {
+        entries.forEach(key => {
+            html += `
+                <div class="cart-item">
+                    <span>• ${key} x ${cart[key]}</span>
+                    <button class="remove-btn" onclick="removeFromCart('${key}')">✕</button>
+                </div>`;
+        });
+    }
+    document.getElementById('cartItems').innerHTML = html;
+}
+
+function checkout() {
+    if (Object.keys(cart).length === 0) return alert(data[lang].cartEmpty);
+    let msg = (lang === 'ar' ? "مرحبا، أريد طلب:\n" : lang === 'ml' ? "ഹായ്, എനിക്ക് ഓർഡർ ചെയ്യണം:\n" : "Hi, I want to order:\n");
+    for (let key in cart) { msg += `${key} x ${cart[key]}\n`; }
+    window.open("https://wa.me/971509649695?text=" + encodeURIComponent(msg), '_blank');
+}
+
+setLang('en');
 </script>
-
 </body>
 </html>
